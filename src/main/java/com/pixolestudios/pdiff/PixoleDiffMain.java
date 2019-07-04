@@ -2,6 +2,7 @@ package main.java.com.pixolestudios.pdiff;
 
 public class PixoleDiffMain {
     public static void main(String[] args){
-        System.out.print("hello");
+        Diff imgdiff = new Diff("smoothedHeightMap.png", "smoothedHeightMap_orig.png");
+        imgdiff.CalculateDiff(true, true);
     }
 }
