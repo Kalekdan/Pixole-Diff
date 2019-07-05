@@ -6,7 +6,7 @@ public class PixoleDiffMain {
     private PixoleDiffMain() {
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         PrimaryWindow window = new PrimaryWindow();
         window.setVisible(true);
     }

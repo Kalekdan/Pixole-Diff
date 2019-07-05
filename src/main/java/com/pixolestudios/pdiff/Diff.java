@@ -33,7 +33,8 @@ public class Diff {
 
     /**
      * Calculates the diff between the two images
-     * @param ignoreColor if true, diffs only of color will be ignored
+     *
+     * @param ignoreColor     if true, diffs only of color will be ignored
      * @param generateDiffImg if true, will generate a diff image
      */
     public void CalculateDiff(boolean ignoreColor, boolean generateDiffImg) {

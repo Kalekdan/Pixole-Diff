@@ -24,7 +24,7 @@ public class PrimaryWindow extends JFrame {
     private String img1Path = "";
     private String img2Path = "";
 
-    public PrimaryWindow(){
+    public PrimaryWindow() {
         setupWindow();
         setupWindowContents();
         setLayout(new FlowLayout());
@@ -77,7 +77,7 @@ public class PrimaryWindow extends JFrame {
 
     // If both images are loaded - enable diff button
     private void prepareToDiff() {
-        if (!img1Path.isEmpty() && !img2Path.isEmpty()){
+        if (!img1Path.isEmpty() && !img2Path.isEmpty()) {
             btnDiff.setEnabled(true);
         } else {
             btnDiff.setEnabled(false);
@@ -90,7 +90,7 @@ public class PrimaryWindow extends JFrame {
         // if the user selects a file
         if (r == JFileChooser.APPROVE_OPTION) {
             String path = fileChooser.getSelectedFile().getAbsolutePath();
-            if (oneOrTwo == 1){
+            if (oneOrTwo == 1) {
                 img1Path = path;
             } else {
                 img2Path = path;

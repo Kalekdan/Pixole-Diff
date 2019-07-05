@@ -30,7 +30,7 @@ public class Image {
         return width;
     }
 
-    protected int getRGB(int x, int y){
+    protected int getRGB(int x, int y) {
         return img.getRGB(x, y);
     }
 
