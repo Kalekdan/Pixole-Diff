@@ -15,14 +15,25 @@ public class Diff {
     private int diffR = 255;    // Red
     private int diffG = 0;      // Green
     private int diffB = 0;      // Blue
-    // Color to highlight diffs in output image
+    // Color to highlight diffs in output image (currently red - TODO: make this cusomtizable
     private int diffColor = (diffA << 24) | (diffR << 16) | (diffG << 8) | diffB;
 
+    /**
+     * Constructor for Diff tool
+     *
+     * @param imgPath1 image to compare
+     * @param imgPath2 secont image to compare to
+     */
     public Diff(String imgPath1, String imgPath2) {
         image1 = new Image(imgPath1);
         image2 = new Image(imgPath2);
     }
 
+    /**
+     * Calculates the diff between the two images
+     * @param ignoreColor if true, diffs only of color will be ignored
+     * @param generateDiffImg if true, will generate a diff image
+     */
     protected void CalculateDiff(boolean ignoreColor, boolean generateDiffImg) {
         if (image1.getWidth() != image2.getWidth() || image1.getHeight() != image2.getHeight()) {
             System.out.print("different size images");
@@ -58,7 +69,8 @@ public class Diff {
             }
         }
         System.out.println(CalcPercentageDiff(numDiffs, image1.getHeight() * image1.getWidth()) + "% diff");
-        System.out.print(CalcPercentageMatch(numDiffs, image1.getHeight() * image1.getWidth()) + "% match");
+        System.out.println(CalcPercentageMatch(numDiffs, image1.getHeight() * image1.getWidth()) + "% match");
+        System.out.print(numDiffs + " pixels with diffs");
     }
 
     private void GenerateDiffImg(int x, int y, boolean isDiffPixel) {
@@ -79,6 +91,4 @@ public class Diff {
     private float CalcPercentageMatch(int numDiffPixels, int totalNoPixels) {
         return (((float) totalNoPixels - numDiffPixels) / ((float) totalNoPixels)) * 100;
     }
-
-
 }
