@@ -5,20 +5,21 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+@SuppressWarnings("MagicNumber")
 public class Image {
     private BufferedImage img = null;
-    private int height = 0;
-    private int width = 0;
+    private int height;
+    private int width;
 
     public Image(String pathToImg) {
         try {
             img = ImageIO.read(new File(pathToImg));
+            height = img.getHeight();
+            width = img.getWidth();
         } catch (IOException e) {
             //TODO handle IO exception
             e.printStackTrace();
         }
-        height = img.getHeight();
-        width = img.getWidth();
     }
 
     protected int getHeight() {

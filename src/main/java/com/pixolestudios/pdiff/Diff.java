@@ -9,8 +9,8 @@ import java.io.IOException;
 
 @SuppressWarnings("MagicNumber")
 public class Diff {
-    private Image image1 = null;
-    private Image image2 = null;
+    private Image image1;
+    private Image image2;
 
     private BufferedImage diffImg = null;
     private int diffA = 255;    // Alpha
@@ -48,7 +48,7 @@ public class Diff {
         if (generateDiffImg) {
             diffImg = new BufferedImage(image1.getWidth(), image1.getHeight(), BufferedImage.TYPE_INT_ARGB);
         }
-        boolean foundDiffAtPixel = false;
+        boolean foundDiffAtPixel;
         int numDiffs = 0;
         for (int i = 0; i < image1.getWidth(); i++) {
             for (int j = 0; j < image1.getHeight(); j++) {
