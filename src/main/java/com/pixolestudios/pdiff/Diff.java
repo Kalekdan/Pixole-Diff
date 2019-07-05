@@ -36,7 +36,7 @@ public class Diff {
      * @param ignoreColor if true, diffs only of color will be ignored
      * @param generateDiffImg if true, will generate a diff image
      */
-    protected void CalculateDiff(boolean ignoreColor, boolean generateDiffImg) {
+    public void CalculateDiff(boolean ignoreColor, boolean generateDiffImg) {
         if (image1.getWidth() != image2.getWidth() || image1.getHeight() != image2.getHeight()) {
             PLog.info("different size images");
         } else {

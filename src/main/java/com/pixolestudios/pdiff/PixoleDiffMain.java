@@ -1,11 +1,13 @@
 package main.java.com.pixolestudios.pdiff;
 
+import main.java.com.pixolestudios.uiutils.PrimaryWindow;
+
 public class PixoleDiffMain {
     private PixoleDiffMain() {
     }
 
     public static void main(String[] args){
-        Diff imgdiff = new Diff("smoothedHeightMap.png", "smoothedHeightMap_orig.png");
-        imgdiff.CalculateDiff(true, true);
+        PrimaryWindow window = new PrimaryWindow();
+        window.setVisible(true);
     }
 }
