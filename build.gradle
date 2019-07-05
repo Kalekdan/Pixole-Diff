@@ -28,9 +28,18 @@ task start(type: JavaExec) {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'main.java.com.pixolestudios.pdiff.PixoleDiffMain',
-                'Class-Path': 'libs/'
+        attributes 'Main-Class': 'main.java.com.pixolestudios.pdiff.PixoleDiffMain'
     }
+}
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'main.java.com.pixolestudios.pdiff.PixoleDiffMain'
+    }
+    baseName = project.name + '-fat'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 repositories {
