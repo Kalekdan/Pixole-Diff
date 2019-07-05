@@ -21,20 +21,27 @@ sourceCompatibility = 1.8
 ext.buildNumber = System.getenv("BUILD_NUMBER") ?: "dev"
 version '1.0.0-alpha'
 
+task start(type: JavaExec) {
+    classpath sourceSets.main.runtimeClasspath
+    main = "main.java.com.pixolestudios.pdiff.PixoleDiffMain"
+}
+
 jar {
     manifest {
-        attributes 'Main-Class': 'main.java.com.pixolestudios.pdiff.PixoleDiffMain'
+        attributes 'Main-Class': 'main.java.com.pixolestudios.pdiff.PixoleDiffMain',
+                'Class-Path': 'libs/'
     }
 }
 
-//dependencies {
+repositories {
+//    mavenCentral()
+    flatDir {
+        dirs 'src/libs'
+    }
+}
+
+dependencies {
 //    testCompile 'junit:junit:4.12'
 //    compile 'junit:junit:4.12'
-//    compile name : 'plogger-1.1.0-alpha'
-//}
-//repositories {
-//    mavenCentral()
-//    flatDir {
-//        dirs 'src/libs'
-//    }
-//}
+    compile name : 'plogger-1.2.0-alpha'
+}

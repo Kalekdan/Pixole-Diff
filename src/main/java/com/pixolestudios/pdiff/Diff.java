@@ -1,5 +1,7 @@
 package main.java.com.pixolestudios.pdiff;
 
+import main.java.com.pixolestudios.plogger.PLog;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -36,7 +38,7 @@ public class Diff {
      */
     protected void CalculateDiff(boolean ignoreColor, boolean generateDiffImg) {
         if (image1.getWidth() != image2.getWidth() || image1.getHeight() != image2.getHeight()) {
-            System.out.print("different size images");
+            PLog.info("different size images");
         } else {
             CompareImgs(ignoreColor, generateDiffImg);
         }
@@ -52,7 +54,6 @@ public class Diff {
             for (int j = 0; j < image1.getHeight(); j++) {
                 foundDiffAtPixel = false;
                 if (image1.getRGB(i, j) != image2.getRGB(i, j)) {
-//                    System.out.print("diff found at " + i + ", " + j);
                     foundDiffAtPixel = true;
                     numDiffs++;
                 }
@@ -68,9 +69,9 @@ public class Diff {
                 e.printStackTrace();
             }
         }
-        System.out.println(CalcPercentageDiff(numDiffs, image1.getHeight() * image1.getWidth()) + "% diff");
-        System.out.println(CalcPercentageMatch(numDiffs, image1.getHeight() * image1.getWidth()) + "% match");
-        System.out.print(numDiffs + " pixels with diffs");
+        PLog.info(CalcPercentageDiff(numDiffs, image1.getHeight() * image1.getWidth()) + "% diff");
+        PLog.info(CalcPercentageMatch(numDiffs, image1.getHeight() * image1.getWidth()) + "% match");
+        PLog.info(numDiffs + " pixels with diffs");
     }
 
     private void GenerateDiffImg(int x, int y, boolean isDiffPixel) {
