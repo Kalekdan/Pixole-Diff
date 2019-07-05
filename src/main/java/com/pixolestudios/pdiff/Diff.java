@@ -63,10 +63,10 @@ public class Diff {
 
     private void GenerateDiffImg(int x, int y, boolean isDiffPixel) {
         if (!isDiffPixel) {
-            diffImg.setRGB(x, y, toRGB(getPixelAlpha(image1.getRGB(x, y)) / 2,
-                    getPixelRed(image1.getRGB(x, y)),
-                    getPixelGreen(image1.getRGB(x, y)),
-                    getPixelBlue(image1.getRGB(x, y))));
+            diffImg.setRGB(x, y, Image.toRGB(image1.getAlpha(x, y) / 2,
+                    image1.getRed(x, y),
+                    image1.getGreen(x, y),
+                    image1.getBlue(x, y)));
         } else {
             diffImg.setRGB(x, y, diffColor);
         }
@@ -80,24 +80,5 @@ public class Diff {
         return (((float) totalNoPixels - numDiffPixels) / ((float) totalNoPixels)) * 100;
     }
 
-    private int getPixelAlpha(int pixel) {
-        return (pixel >> 24) & 0xff;
-    }
-
-    private int getPixelRed(int pixel) {
-        return (pixel >> 16) & 0xff;
-    }
-
-    private int getPixelGreen(int pixel) {
-        return (pixel >> 8) & 0xff;
-    }
-
-    private int getPixelBlue(int pixel) {
-        return (pixel) & 0xff;
-    }
-
-    private int toRGB(int a, int r, int g, int b) {
-        return (a << 24) | (r << 16) | (g << 8) | b;
-    }
 
 }

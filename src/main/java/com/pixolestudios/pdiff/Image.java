@@ -32,4 +32,24 @@ public class Image {
     protected int getRGB(int x, int y){
         return img.getRGB(x, y);
     }
+
+    protected int getAlpha(int x, int y) {
+        return (img.getRGB(x, y) >> 24) & 0xff;
+    }
+
+    protected int getRed(int x, int y) {
+        return (img.getRGB(x, y) >> 16) & 0xff;
+    }
+
+    protected int getGreen(int x, int y) {
+        return (img.getRGB(x, y) >> 8) & 0xff;
+    }
+
+    protected int getBlue(int x, int y) {
+        return (img.getRGB(x, y)) & 0xff;
+    }
+
+    protected static int toRGB(int a, int r, int g, int b) {
+        return (a << 24) | (r << 16) | (g << 8) | b;
+    }
 }
