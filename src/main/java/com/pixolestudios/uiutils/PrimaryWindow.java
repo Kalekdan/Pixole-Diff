@@ -6,6 +6,7 @@ import main.java.com.pixolestudios.plogger.PLog;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,6 +41,8 @@ public class PrimaryWindow extends JFrame {
 
     private void setupWindowContents() {
         btnAddImg1 = new JButton("Load image 1");
+        btnAddImg1.setBackground(Color.orange);
+        btnAddImg1.setOpaque(true);
         btnAddImg1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,6 +53,8 @@ public class PrimaryWindow extends JFrame {
         add(btnAddImg1);
 
         btnAddImg2 = new JButton("Load image 2");
+        btnAddImg2.setBackground(Color.orange);
+        btnAddImg2.setOpaque(true);
         btnAddImg2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,8 +97,12 @@ public class PrimaryWindow extends JFrame {
             String path = fileChooser.getSelectedFile().getAbsolutePath();
             if (oneOrTwo == 1) {
                 img1Path = path;
+                btnAddImg1.setBackground(Color.GREEN);
+                btnAddImg1.setOpaque(true);
             } else {
                 img2Path = path;
+                btnAddImg2.setBackground(Color.GREEN);
+                btnAddImg2.setOpaque(true);
             }
             PLog.info("Loading image " + oneOrTwo + " from " + path, "load");
         } else {
