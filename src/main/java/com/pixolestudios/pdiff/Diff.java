@@ -17,7 +17,7 @@ public class Diff {
     private int diffR = 255;    // Red
     private int diffG = 0;      // Green
     private int diffB = 0;      // Blue
-    // Color to highlight diffs in output image (currently red - TODO: make this cusomtizable
+    // Color to highlight diffs in output image (currently red - TODO: make this cusomtizable)
     private int diffColor = (diffA << 24) | (diffR << 16) | (diffG << 8) | diffB;
 
     /**
@@ -36,22 +36,30 @@ public class Diff {
      *
      * @param ignoreColor     if true, diffs only of color will be ignored
      * @param generateDiffImg if true, will generate a diff image
+     * @param quitOnDiff      if true, will stop comparison at first diff found (can significantly increase performance)
      */
-    public void CalculateDiff(boolean ignoreColor, boolean generateDiffImg) {
+    public void CalculateDiff(boolean ignoreColor, boolean generateDiffImg, boolean quitOnDiff) {
         if (image1.getWidth() != image2.getWidth() || image1.getHeight() != image2.getHeight()) {
             PLog.info("different size images");
         } else {
-            CompareImgs(ignoreColor, generateDiffImg);
+            CompareImgs(ignoreColor, generateDiffImg, quitOnDiff);
         }
     }
 
-    private void CompareImgs(boolean ignoreColor, boolean generateDiffImg) {
+    /**
+     * Steps through each pixel and checks if pixels match between images
+     * @param ignoreColor     if true, diffs only of color will be ignored
+     * @param generateDiffImg if true, will generate a diff image
+     * @param quitOnDiff      if true, will stop comparison at first diff found (can significantly increase performance)
+     */
+    private void CompareImgs(boolean ignoreColor, boolean generateDiffImg, boolean quitOnDiff) {
         if (generateDiffImg) {
             diffImg = new BufferedImage(image1.getWidth(), image1.getHeight(), BufferedImage.TYPE_INT_ARGB);
         }
         boolean foundDiffAtPixel;
         int numDiffs = 0;
         for (int i = 0; i < image1.getWidth(); i++) {
+            foundDiffAtPixel = false;
             for (int j = 0; j < image1.getHeight(); j++) {
                 foundDiffAtPixel = false;
                 if (image1.getRGB(i, j) != image2.getRGB(i, j)) {
@@ -61,7 +69,9 @@ public class Diff {
                 if (generateDiffImg) {
                     GenerateDiffImg(i, j, foundDiffAtPixel);
                 }
+                if (quitOnDiff && foundDiffAtPixel) break;
             }
+            if (quitOnDiff && foundDiffAtPixel) break;
         }
         if (generateDiffImg) {
             try {
@@ -75,6 +85,12 @@ public class Diff {
         PLog.info(numDiffs + " pixels with diffs");
     }
 
+    /**
+     * Adds a pixel too the diff image
+     * @param x x coordinate of the pixel
+     * @param y y coordinate of the pixel
+     * @param isDiffPixel if true, will draw pixel as diffColor instead of original color
+     */
     private void GenerateDiffImg(int x, int y, boolean isDiffPixel) {
         if (!isDiffPixel) {
             diffImg.setRGB(x, y, Image.toRGB(image1.getAlpha(x, y) / 2,
@@ -86,10 +102,22 @@ public class Diff {
         }
     }
 
+    /**
+     * Calculates the percentage diff
+     * @param numDiffPixels the number of diff pixels found
+     * @param totalNoPixels the total number of pixels in the image
+     * @return the percentage difference between the images
+     */
     private float CalcPercentageDiff(int numDiffPixels, int totalNoPixels) {
         return (((float) numDiffPixels) / ((float) totalNoPixels)) * 100;
     }
 
+    /**
+     * Calculates the percentage diff
+     * @param numDiffPixels the number of diff pixels found
+     * @param totalNoPixels the total number of pixels in the image
+     * @return the percentage matching between the images
+     */
     private float CalcPercentageMatch(int numDiffPixels, int totalNoPixels) {
         return (((float) totalNoPixels - numDiffPixels) / ((float) totalNoPixels)) * 100;
     }

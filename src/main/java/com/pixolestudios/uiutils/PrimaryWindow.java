@@ -31,6 +31,9 @@ public class PrimaryWindow extends JFrame {
         setLayout(new FlowLayout());
     }
 
+    /**
+     * Create the main window and set height, title etc.
+     */
     private void setupWindow() {
         PLog.debug("Creating main window: " + MAIN_WINDOW_TITLE, "ui");
         setTitle(MAIN_WINDOW_TITLE);
@@ -39,6 +42,9 @@ public class PrimaryWindow extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Add the buttons and their action listeners to the main window
+     */
     private void setupWindowContents() {
         btnAddImg1 = new JButton("Load image 1");
         btnAddImg1.setBackground(Color.orange);
@@ -75,12 +81,17 @@ public class PrimaryWindow extends JFrame {
         add(btnDiff);
     }
 
+    /**
+     * Action performed when clicking the calculate diff button
+     */
     private void performDiffAction() {
         Diff diff = new Diff(img1Path, img2Path);
-        diff.CalculateDiff(false, true);
+        diff.CalculateDiff(false, true, false);
     }
 
-    // If both images are loaded - enable diff button
+    /**
+     * If both images are loaded - enable diff button
+     */
     private void prepareToDiff() {
         if (!img1Path.isEmpty() && !img2Path.isEmpty()) {
             btnDiff.setEnabled(true);
@@ -89,6 +100,10 @@ public class PrimaryWindow extends JFrame {
         }
     }
 
+    /**
+     * Action performed when clicking the load image buttong
+     * @param oneOrTwo whether loading image 1 or image 2
+     */
     private void doLoadImageAction(int oneOrTwo) {
         fileChooser = new JFileChooser();
         int r = fileChooser.showOpenDialog(null);

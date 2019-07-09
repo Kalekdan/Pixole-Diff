@@ -11,6 +11,10 @@ public class Image {
     private int height;
     private int width;
 
+    /**
+     * Loads an image and its details
+     * @param pathToImg the path to the image to load
+     */
     public Image(String pathToImg) {
         try {
             img = ImageIO.read(new File(pathToImg));
@@ -50,6 +54,14 @@ public class Image {
         return (img.getRGB(x, y)) & 0xff;
     }
 
+    /**
+     * Returns a bitwise integer value of an aRGB value
+     * @param a alpha value
+     * @param r red value
+     * @param g green value
+     * @param b blue value
+     * @return the bitwise integer value of the color
+     */
     protected static int toRGB(int a, int r, int g, int b) {
         return (a << 24) | (r << 16) | (g << 8) | b;
     }
