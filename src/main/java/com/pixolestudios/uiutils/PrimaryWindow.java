@@ -4,6 +4,7 @@ import main.java.com.pixolestudios.pdiff.Diff;
 import main.java.com.pixolestudios.plogger.PLog;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import java.awt.Color;
@@ -19,6 +20,7 @@ public class PrimaryWindow extends JFrame {
     private JButton btnAddImg1;
     private JButton btnAddImg2;
     private JButton btnDiff;
+    private JButton btnColorPicker;
 
     private JFileChooser fileChooser;
 
@@ -79,6 +81,24 @@ public class PrimaryWindow extends JFrame {
         });
         btnDiff.setEnabled(false);
         add(btnDiff);
+
+        btnColorPicker = new JButton("Set diff image color");
+        btnColorPicker.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                performColorPickerAction();
+            }
+        });
+        btnColorPicker.setEnabled(true);
+        add(btnColorPicker);
+    }
+
+    private void performColorPickerAction() {
+        Color newColor = JColorChooser.showDialog(
+                this,
+                "Choose diff color",
+                getBackground());
+        Diff.setDiffColor(newColor == null ? Diff.getDiffColor() : newColor.getRGB());
     }
 
     /**

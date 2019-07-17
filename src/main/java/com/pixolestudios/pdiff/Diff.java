@@ -13,12 +13,12 @@ public class Diff {
     private Image image2;
 
     private BufferedImage diffImg = null;
-    private int diffA = 255;    // Alpha
-    private int diffR = 255;    // Red
-    private int diffG = 0;      // Green
-    private int diffB = 0;      // Blue
-    // Color to highlight diffs in output image (currently red - TODO: make this cusomtizable)
-    private int diffColor = (diffA << 24) | (diffR << 16) | (diffG << 8) | diffB;
+    private static int diffA = 255;    // Alpha
+    private static int diffR = 255;    // Red
+    private static int diffG = 0;      // Green
+    private static int diffB = 0;      // Blue
+    // Color to highlight diffs in output image (default red)
+    private static int diffColor = (diffA << 24) | (diffR << 16) | (diffG << 8) | diffB;
 
     /**
      * Constructor for Diff tool
@@ -69,7 +69,7 @@ public class Diff {
                 if (generateDiffImg) {
                     GenerateDiffImg(i, j, foundDiffAtPixel);
                 }
-                if (quitOnDiff && foundDiffAtPixel) break;
+                if (quitOnDiff && foundDiffAtPixel) break; //Stops if quitOnDiff flag is set
             }
             if (quitOnDiff && foundDiffAtPixel) break;
         }
@@ -120,5 +120,13 @@ public class Diff {
      */
     private float CalcPercentageMatch(int numDiffPixels, int totalNoPixels) {
         return (((float) totalNoPixels - numDiffPixels) / ((float) totalNoPixels)) * 100;
+    }
+
+    public static int getDiffColor() {
+        return diffColor;
+    }
+
+    public static void setDiffColor(int newDiffColor) {
+        diffColor = newDiffColor;
     }
 }

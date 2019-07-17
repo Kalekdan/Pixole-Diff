@@ -1,6 +1,7 @@
 package main.java.com.pixolestudios.pdiff;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +22,8 @@ public class Image {
             height = img.getHeight();
             width = img.getWidth();
         } catch (IOException e) {
-            //TODO handle IO exception
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error occurred reading file " + pathToImg, "I/O Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
