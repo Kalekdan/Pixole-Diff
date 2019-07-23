@@ -13,10 +13,10 @@ public class Diff {
     private Image image2;
 
     private BufferedImage diffImg = null;
-    private static int diffA = 255;    // Alpha
-    private static int diffR = 255;    // Red
-    private static int diffG = 0;      // Green
-    private static int diffB = 0;      // Blue
+    private static final int diffA = 255;    // Alpha
+    private static final int diffR = 255;    // Red
+    private static final int diffG = 0;      // Green
+    private static final int diffB = 0;      // Blue
     // Color to highlight diffs in output image (default red)
     private static int diffColor = (diffA << 24) | (diffR << 16) | (diffG << 8) | diffB;
 
